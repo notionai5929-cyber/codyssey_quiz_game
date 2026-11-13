@@ -1,3 +1,41 @@
+# main.py
+from quiz import get_default_quizzes
+
+def play_quiz():
+    quizzes = get_default_quizzes()
+    
+    if not quizzes:
+        print("⚠️ 등록된 퀴즈가 없습니다.")
+        return
+
+    print(f"\n📝 퀴즈를 시작합니다! (총 {len(quizzes)}문제)")
+    score = 0
+
+    for i, quiz in enumerate(quizzes, 1):
+        print("\n----------------------------------------")
+        print(f"[문제 {i}]")
+        quiz.display()
+        
+        while True:
+            try:
+                user_answer = int(input("\n정답 입력 (1~4): ").strip())
+                if user_answer not in [1, 2, 3, 4]:
+                    print("⚠️ 허용 범위 밖 숫자입니다. 1~4 사이의 숫자를 입력해주세요.")
+                    continue
+                break
+            except ValueError:
+                print("⚠️ 숫자 변환 실패. 올바른 숫자를 입력해주세요.")
+
+        if quiz.check_answer(user_answer):
+            print("✅ 정답입니다!")
+            score += 1
+        else:
+            print(f"❌ 오답입니다. (정답: {quiz.answer}번)")
+
+    print("\n========================================")
+    print(f"🏆 결과: {len(quizzes)}문제 중 {score}문제 정답!")
+    print("========================================")
+
 def main():
     while True:
         print("\n========================================")
@@ -10,27 +48,20 @@ def main():
         print("5. 종료")
         print("========================================")
         
-        # 앞뒤 공백 제거 처리
         choice = input("선택: ").strip()
 
-        # 빈 입력 처리
         if not choice:
             print("⚠️ 빈 입력입니다. 1~5 사이의 숫자를 입력해주세요.")
             continue
 
-        # 메뉴 번호별 흐름 제어 및 예외 처리
         if choice == '1':
-            print("📝 퀴즈 풀기를 시작합니다.")
-            # 기능 구현 예정
+            play_quiz()
         elif choice == '2':
             print("📌 새로운 퀴즈를 추가합니다.")
-            # 기능 구현 예정
         elif choice == '3':
             print("📋 등록된 퀴즈 목록을 출력합니다.")
-            # 기능 구현 예정
         elif choice == '4':
             print("🏆 최고 점수를 확인합니다.")
-            # 기능 구현 예정
         elif choice == '5':
             print("게임을 종료합니다.")
             break
@@ -41,5 +72,4 @@ if __name__ == "__main__":
     try:
         main()
     except (KeyboardInterrupt, EOFError):
-        # Ctrl+C 나 EOF 발생 시 강제 종료를 막고 안전하게 처리
         print("\n프로그램을 안전하게 종료합니다.")
