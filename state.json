@@ -1,0 +1,65 @@
+{
+    "best_score": 4,
+    "quizzes": [
+        {
+            "question": "Python의 창시자는?",
+            "choices": [
+                "Guido",
+                "Linus",
+                "Bjarne",
+                "James"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "다음 중 파이썬의 기본 자료형이 아닌 것은?",
+            "choices": [
+                "int",
+                "str",
+                "float",
+                "array"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "파이썬에서 리스트의 길이를 구하는 함수는?",
+            "choices": [
+                "size()",
+                "length()",
+                "len()",
+                "count()"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "조건문 키워드가 아닌 것은?",
+            "choices": [
+                "if",
+                "elif",
+                "else",
+                "then"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "클래스 내부에서 인스턴스 자신을 가리키는 키워드는?",
+            "choices": [
+                "this",
+                "self",
+                "me",
+                "cls"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "숫 동물찍기",
+            "choices": [
+                "사자",
+                "곰",
+                "뱀",
+                "범"
+            ],
+            "answer": 2
+        }
+    ]
+}
