@@ -92,9 +92,9 @@ class QuizGame:
             if choice == '1':
                 self.play_quiz()
             elif choice == '2':
-                print("📌 새로운 퀴즈를 추가합니다. (개발 예정)")
+                self.add_quiz()
             elif choice == '3':
-                print("📋 등록된 퀴즈 목록을 출력합니다. (개발 예정)")
+                self.show_quiz_list()
             elif choice == '4':
                 print(f"🏆 최고 점수: {self.best_score}점")
             elif choice == '5':
@@ -102,6 +102,39 @@ class QuizGame:
                 break
             else:
                 print("⚠️ 잘못된 입력입니다. 1~5 사이의 숫자를 입력해주세요.")
+    def add_quiz(self):
+        print("\n📌 새로운 퀴즈를 추가합니다.")
+        question = input("문제를 입력하세요: ").strip()
+        if not question:
+            print("⚠️ 빈 입력입니다. 퀴즈 추가를 취소합니다.")
+            return
+        choices = []
+        for i in range(1, 5):
+            choice = input(f"선택지 {i}: ").strip()
+            choices.append(choice)
+        while True:
+            try:
+                answer = int(input("정답 번호 (1-4): ").strip())
+                if answer not in [1, 2, 3, 4]:
+                    print("⚠️ 허용 범위 밖 숫자입니다. 1~4 사이의 숫자를 입력해주세요.")
+                    continue
+                break
+            except ValueError:
+                print("⚠️ 숫자 변환 실패. 올바른 숫자를 입력해주세요.")
+        # 새로운 퀴즈 객체를 생성하고 목록에 추가한 뒤 파일에 저장
+        new_quiz = Quiz(question, choices, answer)
+        self.quizzes.append(new_quiz)
+        self.save_data()
+        print("✅ 퀴즈가 성공적으로 추가되었습니다!")
+    def show_quiz_list(self):
+        if not self.quizzes:
+            print("\n⚠️ 등록된 퀴즈가 없습니다.")
+            return
+        print(f"\n📋 등록된 퀴즈 목록 (총 {len(self.quizzes)}개)")
+        print("----------------------------------------")
+        for i, quiz in enumerate(self.quizzes, 1):
+            print(f"[{i}] {quiz.question}")
+        print("----------------------------------------")
 
 def main():
     game = QuizGame()
